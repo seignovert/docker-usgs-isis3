@@ -11,14 +11,14 @@ Dockerfile for [Isis3 (USGS)](https://isis.astrogeology.usgs.gov/)
 
 Start Isis3 on its own:
 ```bash
-docker run -i -t seignovert/usgs-isis3:bare
+docker run --rm -i -t seignovert/usgs-isis3:bare
 ```
 
 Isis3 for Cassini
 ------------------
 To make the image smaller, the Cassini data need to be mounted directly from the local file system when you start to run `docker`:
 ```bash
-docker run --rm --name isis3 -h isis3-docker --volumes \ /path/to/local_cassini_kernels:/usgs/data/cassini/kernels \
+docker run --rm --name isis3 -h isis3-docker --volumes /path/to/local_cassini_kernels:/usgs/data/cassini/kernels
 -i -t seignovert/usgs-isis3:cassini
 ```
 
