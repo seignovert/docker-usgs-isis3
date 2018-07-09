@@ -45,7 +45,6 @@ RUN rsync -azv --delete --partial \
 # Sync partial `base` data
 RUN rsync -azv --delete --partial \
     --exclude='dems' \
-    --exclude='kernels' \
     --exclude='testData' \
     isisdist.astrogeology.usgs.gov::isis3data/data/base $ISIS3DATA
 
@@ -59,5 +58,3 @@ Group = SessionLog\n\
   TerminalOutput = Off\n\
   FileOutput     = Off\n\
 EndGroup" > $HOME/.Isis/IsisPreferences
-
-CMD bash
