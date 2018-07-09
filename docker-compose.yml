@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  isis3-cassini:
+    image: seignovert/usgs-isis3:cassini
+    container_name: isis3-cassini
+    hostname: isis3-docker
+    volumes:
+      - $ISIS_CASSINI:/usgs/data/cassini
+      - $PDS_DATA:/usgs/pds
+    stdin_open: true
+    tty: true
