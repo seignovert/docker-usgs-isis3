@@ -49,4 +49,15 @@ RUN rsync -azv --delete --partial \
     --exclude='testData' \
     isisdist.astrogeology.usgs.gov::isis3data/data/base $ISIS3DATA
 
+# Add Isis User Preferences
+RUN mkdir -p $HOME/.Isis && echo "Group = UserInterface\n\
+  ProgressBar      = Off\n\
+  HistoryRecording = Off\n\
+EndGroup\n\
+\n\
+Group = SessionLog\n\
+  TerminalOutput = Off\n\
+  FileOutput     = Off\n\
+EndGroup" > $HOME/.Isis/IsisPreferences
+
 CMD bash
