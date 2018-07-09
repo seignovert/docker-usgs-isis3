@@ -44,7 +44,7 @@ RUN rsync -azv --delete --partial \
 
 # Sync partial `base` data
 RUN rsync -azv --delete --partial \
-    --exclude='dems' \
+    --exclude='dems/*.cub' \
     --exclude='testData' \
     isisdist.astrogeology.usgs.gov::isis3data/data/base $ISIS3DATA
 
