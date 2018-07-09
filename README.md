@@ -7,22 +7,39 @@ Dockerfile for [Isis3 (USGS)](https://isis.astrogeology.usgs.gov/)
 
 - Based on the latest Ubuntu (18.04 LTS currently)
 - Isis3 binaries are installed in `/usgs/isis`
-- Bare bone data are installed in `/usgs/data`
+- Isis3 data are installed in `/usgs/data`
 
-To run Isis3 docker container:
+Start Isis3 on its own:
 ```bash
-docker run --rm -h isis3-docker --name isis3 -i -t seignovert/usgs-isis3:bare
+docker run -i -t seignovert/usgs-isis3:bare
 ```
 
-(Re)build the container
------------------------
+Isis3 for Cassini
+------------------
+To make the image smaller, the Cassini data need to be mounted directly from the local file system when you start to run `docker`:
 ```bash
-docker build --rm -f isis3.dockerfile -t usgs-isis3:bare .
+docker run --rm --name isis3 -h isis3-docker --volumes \ /path/to/local_cassini_kernels:/usgs/data/cassini/kernels \
+-i -t seignovert/usgs-isis3:cassini
+```
+
+_Or_ you can copy the [`docker-compose.yml`](./docker-compose.yml) file and run directly:
+```bash
+docker-compose run --rm isis3-cassini
+```
+
+> __Note:__ If you use `docker-compose` don't forget to set `CASSINI_KERNELS` and `PDS_DATA` environment variables first (e.g. in `.env` file at the project root)
+
+Cassini kernels
+----------------
+To use the SPICE routines, you may need to pull Cassini data (~30Gb) on your local file system. To retreive theses data from the USGS `isis` servers you only need to run:
+```
+rsync_isis3_cassini_data
 ```
 
 Notes:
 -----
-1. This containner does not provide Isis3 graphic user interface, only `cli` commands are avaible.
-2. `DEMS` are excluded from `data/base` files to make the image smaller.
+1. `doc/src` are excluded from `isis`.
+2. `dems/testData` are excluded from `data/base`.
 
-__Important:__ I have no affiliation with USGS. The package is provided as is, use at your own risk.
+
+> __Important:__ I have no affiliation with USGS. The package is provided as is, use at your own risk.
