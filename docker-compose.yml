@@ -3,7 +3,7 @@ version: '3'
 services:
   isis3:
     build: .
-    image: seignovert/usgs-isis3
+    image: seignovert/usgs-isis3:3.6.1
     container_name: isis3
     hostname: isis3
     volumes:
