@@ -13,14 +13,21 @@ ENV HOME=/usgs
 ENV ISISROOT=$HOME/isis3 ISIS3DATA=$HOME/data
 ENV PATH=$PATH:$ISISROOT/bin
 
-# Create user and home
+# Configure conda for `usgs` user
+# [see. https://github.com/ContinuumIO/docker-images/issues/151#issuecomment-549742754]
 RUN useradd --create-home --home-dir $HOME --shell /bin/bash usgs
+RUN mkdir /opt/conda/envs/usgs /opt/conda/pkgs && \
+    chgrp usgs /opt/conda/pkgs && \
+    chmod g+w /opt/conda/pkgs && \
+    touch /opt/conda/pkgs/urls.txt && \
+    chown usgs /opt/conda/envs/usgs /opt/conda/pkgs/urls.txt
+
+# Change user to `usgs` and change directory to `/usgs`.
 USER usgs
 WORKDIR $HOME
 
-# Sync ISIS with conda
-RUN conda config --add channels conda-forge && \
-    conda config --add channels usgs-astrogeology && \
+# INstall ISIS through conda
+RUN conda config --add channels conda-forge --add channels usgs-astrogeology && \
     conda create -y --prefix ${ISISROOT} && \
     conda install -y --prefix ${ISISROOT} isis3
 
