@@ -1,6 +1,7 @@
 Dockerfile for [Isis3 (USGS)](https://isis.astrogeology.usgs.gov/)
 =========================
 
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/seignovert/docker-usgs-isis3?label=latest)](https://hub.docker.com/r/seignovert/usgs-isis3/tags)
 [![Docker Automated build](https://img.shields.io/docker/automated/seignovert/usgs-isis3.svg)](https://hub.docker.com/r/seignovert/usgs-isis3/)
 [![Docker Build Status](https://img.shields.io/docker/build/seignovert/usgs-isis3.svg)](https://hub.docker.com/r/seignovert/usgs-isis3/)
 [![GitHub license](https://img.shields.io/github/license/seignovert/docker-usgs-isis3.svg)](https://github.com/seignovert/docker-usgs-isis3/blob/master/LICENSE.md)
